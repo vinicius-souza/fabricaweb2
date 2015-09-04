@@ -3,12 +3,16 @@ package br.fabricadeprogamador.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import br.com.fabricadeprogramador.entidade.Usuario;
+import org.springframework.stereotype.Repository;
 
+import br.com.fabricadeprogramador.entidade.Usuario;
+@Repository
 public class UsuarioDAO {
 	//Dependência
+	@PersistenceContext
 	EntityManager em;
 
 	public UsuarioDAO(EntityManager em) {

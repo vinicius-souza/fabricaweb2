@@ -1,4 +1,4 @@
-package br.fabricadeprogamador.dao;
+package br.com.fabricadeprogamador.dao;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fabricadeprogramador.entidade.Usuario;
 @Repository
@@ -18,12 +19,15 @@ public class UsuarioDAO {
 	public UsuarioDAO(EntityManager em) {
 		this.em = em;
 	}
+	
+	public UsuarioDAO() {
+		
+	}
 
-
-	public void salvar(Usuario usuario) {
-		em.getTransaction().begin();
-		em.merge(usuario);
-		em.getTransaction().commit();
+	@Transactional
+	public Usuario salvar(Usuario usuario) {
+		Usuario u = em.merge(usuario);
+		return u;
 	}
 
 	public Usuario buscarPorId(int id) {
@@ -35,11 +39,9 @@ public class UsuarioDAO {
 		
 		return q.getResultList();
 	}
-	
+	@Transactional
 	public void excluir(Usuario usuario){
-		em.getTransaction().begin();
-		em.remove(usuario);
-		em.getTransaction().commit();
+		em.remove(usuario);		
 	}
 
 }

@@ -6,8 +6,8 @@ import javax.persistence.Persistence;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import br.com.fabricadeprogamador.dao.UsuarioDAO;
 import br.com.fabricadeprogramador.entidade.Usuario;
-import br.fabricadeprogamador.dao.UsuarioDAO;
 
 public class TestHibernate {
 

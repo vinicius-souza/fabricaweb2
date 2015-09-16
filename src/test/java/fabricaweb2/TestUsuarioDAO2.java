@@ -1,4 +1,5 @@
 package fabricaweb2;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,12 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
-import br.com.fabricadeprogamador.dao.UsuarioDAO;
+import br.com.fabricadeprogramador.dao.DAOException;
+import br.com.fabricadeprogramador.dao.UsuarioDAOJPA;
 import br.com.fabricadeprogramador.entidade.Usuario;
 
 
@@ -25,7 +29,8 @@ import br.com.fabricadeprogramador.entidade.Usuario;
 public class TestUsuarioDAO2 {
 
 	@Autowired
-	UsuarioDAO usuarioDAO;
+	@Qualifier("usuarioDAOJPA")
+	UsuarioDAOJPA usuarioDAO;
 
 	
 	@Test
@@ -60,8 +65,9 @@ public class TestUsuarioDAO2 {
 		
 	}
 	
+	@Transactional
 	@Test
-	public void testExcluir(){
+	public void testExcluir() throws DAOException{
 		//Criar um novo usuario
 		Usuario usu =  new Usuario();
 		usu.setNome("test");

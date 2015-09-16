@@ -11,14 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import br.com.fabricadeprogamador.dao.UsuarioDAO;
+import br.com.fabricadeprogramador.dao.DAOException;
+import br.com.fabricadeprogramador.dao.UsuarioDAOJPA;
 import br.com.fabricadeprogramador.entidade.Usuario;
 
 public class TestUsuarioDAO {
 
 	EntityManager em;
 	ClassPathXmlApplicationContext ctx;
-	UsuarioDAO usuarioDAO;
+	UsuarioDAOJPA usuarioDAO;
 
 	// Método que inicializa o contexto do Spring e é executado ANTES do Teste
 	@Before
@@ -32,7 +33,7 @@ public class TestUsuarioDAO {
 		em = emf.createEntityManager();
 
 		// Criando UsuarioDAO
-		usuarioDAO = new UsuarioDAO(em);
+		usuarioDAO = new UsuarioDAOJPA(em);
 	}
 
 	@After
@@ -75,7 +76,7 @@ public class TestUsuarioDAO {
 	}
 
 	@Test
-	public void testExcluir() {
+	public void testExcluir() throws DAOException {
 
 		// Criando Usuario
 		Usuario usu = new Usuario();
